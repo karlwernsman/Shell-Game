@@ -2,18 +2,19 @@
 // import { getRandomItem } from './utils.js';
 
 /* State */
-let gameState = 'results'; //'guess' or 'results'
-let guess = 'guess-3'; //'guess-1', 'guess-2', or 'guess-3'
-//let pearl = 'shell-1'; //'pearl-1', 'pearl-2', or 'pearl-3'
-//let reveal = 'pearl'; // ?? 'pearl' or 'pearl-hidden'
-//let results = ''; // 'win' or 'lose'
-//let answer = 1;
+let gameState = 'guess'; //'guess' or 'results'
+let guess = ''; //'guess-1', 'guess-2', or 'guess-3'
+let pearl = '';
 
 /* Actions */
 function loadPage() {
     displayShells();
 }
 
+function playAgain() {
+    gameState = 'guess';
+    loadPage();
+}
 /* Components */
 
 /* Scoreboard */
@@ -55,20 +56,45 @@ function displayShells() {
         if (guess === 'guess-1') {
             shell1.classList.add('reveal');
             pearl1.classList.remove('hidden');
+            resultsDiv.classList.remove('hidden');
         }
         if (guess === 'guess-2') {
             shell2.classList.add('reveal');
             pearl2.classList.remove('hidden');
+            resultsDiv.classList.remove('hidden');
         }
         if (guess === 'guess-3') {
             shell3.classList.add('reveal');
             pearl3.classList.remove('hidden');
+            resultsDiv.classList.remove('hidden');
         } else {
             guessDiv.classList.add('hidden');
         }
     }
 }
 // event listeners
+guess1.addEventListener('click', () => {
+    guess = 'guess-1';
+    pearl = '';
+    gameState = 'results';
+    displayShells(shell1);
+});
+guess2.addEventListener('click', () => {
+    guess = 'guess-2';
+    pearl = '';
+    gameState = 'results';
+    displayShells(shell2);
+});
+guess3.addEventListener('click', () => {
+    guess = 'guess-3';
+    pearl = '';
+    gameState = 'results';
+    displayShells(shell3);
+});
+
+playAgainButton.addEventListener('click', () => {
+    playAgain();
+});
 
 /* Run page load code */
 loadPage();
